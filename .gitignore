@@ -99,3 +99,7 @@ ENV/
 
 # mypy
 .mypy_cache/
+
+# This repo
+data/
+elasticsearch-6.2.2/
