@@ -5,7 +5,7 @@ from elasticsearch import helpers
 
 DOC_DIR = pathlib.Path('../data/ettoday/').resolve()
 DOC_PATHS = sorted(DOC_DIR.glob('et*.rec'))
-BATCH_SIZE = 1000
+BATCH_SIZE = 2000
 
 es = Elasticsearch()
 # curl -XDELETE 'localhost:9200/ettoday?pretty'
@@ -28,13 +28,12 @@ def extract_record(data):
             yield record
 
 
-cnt = 0
-for path in DOC_PATHS:
-    print(path, end='...')
+def build_doc(path):
     with path.open('r') as f:
         data = f.readlines()
 
-    actions = []
+    cnt = 0
+    actions = []  # batch operation
     for record in extract_record(data):
         actions.append({
             '_index': 'ettoday',
@@ -46,10 +45,11 @@ for path in DOC_PATHS:
         if len(actions) == BATCH_SIZE:
             helpers.bulk(es, actions)
             actions = []
-
     if len(actions) > 0:
         helpers.bulk(es, actions)
 
-    print('done')
+    return cnt
 
-print('#Record:', cnt)
+
+cnts = [build_doc(path) for path in tqdm(DOC_PATHS)]
+print('total:', sum(cnts))
