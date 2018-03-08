@@ -28,11 +28,11 @@ def extract_record(data):
             yield record
 
 
-def build_doc(path):
+cnt = 0
+for path in tqdm(DOC_PATHS):
     with path.open('r') as f:
         data = f.readlines()
 
-    cnt = 0
     actions = []  # batch operation
     for record in extract_record(data):
         actions.append({
@@ -45,11 +45,8 @@ def build_doc(path):
         if len(actions) == BATCH_SIZE:
             helpers.bulk(es, actions)
             actions = []
+    
     if len(actions) > 0:
         helpers.bulk(es, actions)
 
-    return cnt
-
-
-cnts = [build_doc(path) for path in tqdm(DOC_PATHS)]
-print('total:', sum(cnts))
+print('total:', cnt)
