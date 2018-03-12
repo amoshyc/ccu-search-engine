@@ -30,7 +30,7 @@ def extract_record(data):
 
 cnt = 0
 for path in tqdm(DOC_PATHS):
-    with path.open('r') as f:
+    with path.open('r', encoding='UTF-8') as f:
         data = f.readlines()
 
     actions = []  # batch operation
