@@ -14,6 +14,11 @@ body {
     overflow-x: hidden;
 }
 
+em {
+    font-style: normal;
+    font-weight: bold;
+}
+
 .section {
     width: 100vw;
     display: flex;
@@ -25,7 +30,7 @@ body {
 
 #search-section {
     height: 100vh;
-    background-color: #202020;
+    background-color: #303030;
     background-image: url('bg.jpg');
 
     #input {
@@ -104,7 +109,7 @@ body {
             overflow-x: hidden;
             font-family: 'Bitter', sans;
 
-            * {
+            a.title, span.url, p.body {
                 display: block;
             }
 
@@ -133,6 +138,15 @@ body {
                 color: #404040;
                 font-size: 16px;
             }
+        }
+    }
+
+    div.meta {
+        position: fixed;
+        left: 30px;
+        bottom: 15px;
+        span {
+            color: #404040;
         }
     }
 }

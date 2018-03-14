@@ -7,7 +7,7 @@ var increment_result = (data) => {
 
     for (var idx = 0; idx < data['len']; idx++) {
         cnt += 1;
-        var item = data['res'][idx];
+        var item = data['data'][idx];
         var html = `
             <div class="item">
                 <a class="title" target="_blank" href=${item.url} data-id=${cnt}>${item.title}</a>
@@ -28,7 +28,10 @@ var submit_query = () => {
     if (query == "")
         return;
 
-    $.post('/search', { 'query': query }, () => {
+    $.post('/search', { 'query': query }, (meta) => {
+        $('div.meta span.total').html('Total:' + meta['total']);
+
+        $('#result-section > div.container').empty();
         $.post('/more', {}, (ret) => {
             increment_result(ret);
             $.scrollTo($('#result-section'), 200, { axis: 'y' });
@@ -37,9 +40,7 @@ var submit_query = () => {
 }
 
 var init_submit_button = () => {
-    $('#submit').click(() => {
-
-    });
+    $('#submit').click(submit_query);
 }
 
 var init_more_button = () => {
@@ -51,13 +52,7 @@ var init_more_button = () => {
 var init_input_field = () => {
     $('#input_input').keypress((e) => {
         if (e.which == 13) {
-            var query = $('#input_input').val();
-            if (query == "")
-                return true;
-
-            $.post('/search', { 'query': query }, () => {
-                $.post('/more', {}, increment_result);
-            });
+            submit_query();
             return false;
         }
     });
