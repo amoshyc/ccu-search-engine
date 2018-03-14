@@ -1,0 +1,66 @@
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <title>CCU Search Engine HW1</title>
+
+    <link rel="shortcut icon" type="image/png" href="static/me.jpg" />
+
+    <!-- MDL -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.blue-orange.min.css" />
+    <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+
+    <!-- Custom -->
+    <link rel="stylesheet" href="static/style.css" />
+    <script defer src="https://code.jquery.com/jquery-3.2.1.js"></script>
+    <script defer src="//cdnjs.cloudflare.com/ajax/libs/jquery-scrollTo/2.1.2/jquery.scrollTo.min.js"></script>
+    <script defer src="static/script.js"></script>
+</head>
+
+<body>
+
+    <!-- input section -->
+    <section id="search-section" class="section">
+        <div id="input">
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                <input class="mdl-textfield__input" type="text" id="input_input">
+                <label class="mdl-textfield__label" for="input_input">
+                    
+                </label>
+            </div>
+            <button id="submit" class="mdl-button mdl-js-button mdl-button--icon mdl-button--colored">
+                <i class="material-icons">search</i>
+            </button>
+            <div class="mdl-tooltip" for="submit">
+                Search
+            </div>
+        </div>
+
+        <div id="about">
+            <img src="static/me.jpg" alt="me">
+            <p>
+                <a target="_blank" href="https://github.com/amoshyc">https://github.com/amoshyc</a>
+                <br/> 搜尋引擎作業一
+            </p>
+        </div>
+    </section>
+
+    <!-- result section -->
+    <section id="result-section" class="section">
+        <div class="container">
+        </div>
+    </section>
+
+    <div id="nav">
+        <a onclick="$.scrollTo($('#search-section'), 200)">#Search</a>
+        <a onclick="$.scrollTo($('#result-section'), 200)">#Result</a>
+        <a id="more">#More</a>
+    </div>
+    
+    <div id="end" style="display: none"></div>
+
+</body>
+
+</html>
