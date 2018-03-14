@@ -7,6 +7,7 @@ import tornado.web
 from elasticsearch import Elasticsearch
 
 es = Elasticsearch()
+from_ = -1
 query = {
     "size": 10,
     "query": {
@@ -53,6 +54,8 @@ class SearchHandler(tornado.web.RequestHandler):
 class MoreHandler(tornado.web.RequestHandler):
     def post(self):
         global query, from_
+        if from_ == -1:
+            return
         res = es.search(
             index='ettoday', doc_type='news', body=query, from_=from_)
         self.write({
