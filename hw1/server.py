@@ -3,6 +3,7 @@ import pathlib
 
 import tornado.ioloop
 import tornado.web
+from pprint import pprint
 
 from elasticsearch import Elasticsearch
 
@@ -58,6 +59,7 @@ class MoreHandler(tornado.web.RequestHandler):
             return
         res = es.search(
             index='ettoday', doc_type='news', body=query, from_=from_)
+        pprint(res)
         self.write({
             'len': len(res['hits']['hits']),
             'data': list(flatten(hit) for hit in res['hits']['hits'])
