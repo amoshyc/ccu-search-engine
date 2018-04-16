@@ -103,3 +103,5 @@ ENV/
 # This repo
 data/
 elasticsearch-6.2.2/
+solr-7.3.0/
+
