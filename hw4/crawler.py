@@ -17,11 +17,7 @@ class Crawler(object):
             self.chrome.close_tab(tab)
 
         tab = self.chrome.add_tab(url)
-        self.chrome.close_tab(tab)
-        html = tab.html
-        self.chrome.close_tab(tab)
-
-        return html
+        return tab.html
 
     def _parse(self, url, html):
         dom = bs4.BeautifulSoup(html, 'lxml')
